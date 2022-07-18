@@ -23,18 +23,18 @@ export const addBirthday: Command = {
     await interaction.deferReply();
     
     const { user } = interaction;
-    const name = interaction.options.getString("Name", true);
+    const name = interaction.options.getMember("Name", true);
     const birthday = interaction.options.getString("Birthday", true);
 
 	
 	const embedExample = new MessageEmbed();
     embedExample.setTitle("Added Birthday");
-    embedExample.setDescription(name);
+    //embedExample.setDescription(name.toString());
     embedExample.setAuthor({
       name: user.tag,
       iconURL: user.displayAvatarURL(),
     });
-    //embedExample.addField("Title", "Desc", true);
+    embedExample.addField(name.toString(), birthday, true);
     embedExample.setFooter({
       text:
         "I will remember this birthday!",
