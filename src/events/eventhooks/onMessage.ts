@@ -3,8 +3,6 @@ import { randomBigLetter } from "../../messages/randomBigLetters";
 import { generateCopyPastaReply } from "../../messages/replyWithCopypasta";
 
 export const onMessageCreated = async (message: Message, client: Client) => {
-  console.log("Message Created:");
-  console.log(message.content);
   if (!message.author.bot) {
     let messageContent = message.content;
 
