@@ -36,7 +36,7 @@ export const removeBirthday = async (userName: string) => {
 
 //ToDo: Update Birthday
 export const updateBirthday = async (userName: string, newBirthdate: string) => {
-  const stmt = db.prepare("UPDATE birthdays (name, birthday) WHERE name = ?");
+  const stmt = db.prepare("UPDATE FROM birthdays (name, birthday) WHERE name = ?");
   const result = stmt.run(userName, newBirthdate);
   if (result !== undefined) {
     return result;
