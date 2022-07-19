@@ -1,41 +1,42 @@
-import { Client } from "discord.js";
-import { onInteraction } from "./eventhooks/onInteraction";
-import { onMessageCreated } from "./eventhooks/onMessage";
-import { announceBirthday } from "../messages/announceBirthday";
+import { Client } from 'discord.js';
+import { onInteraction } from './eventhooks/onInteraction';
+import { onMessageCreated } from './eventhooks/onMessage';
+import { announceBirthday } from '../messages/announceBirthday';
 
 export const AttachEvents = async (client: Client): Promise<void> => {
-  console.log(`Attaching Slash Commands...`);
+  console.log('Attaching Slash Commands...');
 
-  //Slash Command Event
+  // Slash Command Event
   client.on(
-    "interactionCreate",
-    async (interaction) => await onInteraction(interaction)
+    'interactionCreate',
+    async (interaction) => await onInteraction(interaction),
   );
 
-  console.log(`Attaching Messages...`);
+  console.log('Attaching Messages...');
 
-  //Bot mentions
+  // Bot mentions
   client.on(
-    "messageCreate",
-    async (message) => await onMessageCreated(message, client)
+    'messageCreate',
+    async (message) => await onMessageCreated(message, client),
   );
 
   await periodicBirthdayCheck(client);
-}
-
+};
 
 async function periodicBirthdayCheck(client: Client) {
-  var now = new Date();
-  var night = new Date(
+  const now = new Date();
+  const night = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate() + 1, // the next day, ...
-    0, 0, 0 // ...at 00:00:00 hours
+    0,
+    0,
+    0, // ...at 00:00:00 hours
   );
-  var msToMidnight = night.getTime() - now.getTime();
+  const msToMidnight = night.getTime() - now.getTime();
 
-  setTimeout(function () {
-    announceBirthday(client);        //      <-- This is the function being called at midnight.
-    periodicBirthdayCheck(client);    //      Then, reset again next midnight.
+  setTimeout(() => {
+    announceBirthday(client); //      <-- This is the function being called at midnight.
+    periodicBirthdayCheck(client); //      Then, reset again next midnight.
   }, msToMidnight);
 }
