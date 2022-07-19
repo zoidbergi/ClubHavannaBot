@@ -1,6 +1,7 @@
 import { Client } from "discord.js";
 import { onInteraction } from "./eventhooks/onInteraction";
 import { onMessageCreated } from "./eventhooks/onMessage";
+import { announceBirthday } from "../messages/announceBirthday";
 
 export const AttachEvents = async (client: Client): Promise<void> => {
   console.log(`Attaching Slash Commands...`);
@@ -18,4 +19,23 @@ export const AttachEvents = async (client: Client): Promise<void> => {
     "messageCreate",
     async (message) => await onMessageCreated(message, client)
   );
+
+  await periodicBirthdayCheck(client);
+}
+
+
+async function periodicBirthdayCheck(client: Client) {
+  var now = new Date();
+  var night = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1, // the next day, ...
+    0, 0, 0 // ...at 00:00:00 hours
+  );
+  var msToMidnight = night.getTime() - now.getTime();
+
+  setTimeout(function () {
+    announceBirthday(client);        //      <-- This is the function being called at midnight.
+    periodicBirthdayCheck(client);    //      Then, reset again next midnight.
+  }, msToMidnight);
 }
