@@ -14,8 +14,8 @@ export async function announceBirthday(client: Client) {
     result.forEach(entry => {
         if (lastAnnouncedBirthdayName !== entry.name) {
             let date = new Date(entry.birthday);
-            if (isToday(date)) {
-                const channel = client.channels.cache.find(ch => ch.id === '994584449415139418'); //994584449415139418 test channel 508675397727158283 real channel
+            if (isBirthdayToday(date)) {
+                const channel = client.channels.cache.find(ch => ch.id === '508675397727158283'); //994584449415139418 test channel 508675397727158283 real channel
                 if (channel?.isText()) {
                     const sendChannel = channel as TextChannel;
                     const party = client.emojis.cache.find(emoji => emoji.name === "Pepega");
@@ -28,9 +28,8 @@ export async function announceBirthday(client: Client) {
     });
 }
 
-const isToday = (someDate: Date) => {
+const isBirthdayToday = (someDate: Date) => {
     const today = new Date()
     return someDate.getDate() == today.getDate() &&
-        someDate.getMonth() == today.getMonth() &&
-        someDate.getFullYear() == today.getFullYear()
+        someDate.getMonth() == today.getMonth()
 }
