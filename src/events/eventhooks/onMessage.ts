@@ -1,6 +1,7 @@
 import { Client, Message } from "discord.js";
 import { randomBigLetter } from "../../messages/randomBigLetters";
 import { generateCopyPastaReply } from "../../messages/replyWithCopypasta";
+import { announceBirthday } from "../../messages/announceBirthday";
 
 export const onMessageCreated = async (message: Message, client: Client) => {
   if (!message.author.bot) {
@@ -18,5 +19,6 @@ export const onMessageCreated = async (message: Message, client: Client) => {
       const reply = generateCopyPastaReply();
       await message.reply(reply);
     }
+    announceBirthday(client);
   }
 };
