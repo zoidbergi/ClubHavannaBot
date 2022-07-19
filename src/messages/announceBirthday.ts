@@ -19,7 +19,7 @@ export async function announceBirthday(client: Client) {
                 if (channel?.isText()) {
                     const sendChannel = channel as TextChannel;
                     const party = client.emojis.cache.find(emoji => emoji.name === "Pepega");
-                    const message: string = '@everyone' + ' ${entry.name} hat heute Geburtstag! WOO ' + party?.toString();
+                    const message: string = '@everyone' + ` ${entry.name} hat heute Geburtstag! WOO ` + party?.toString();
                     sendChannel.send(message);
                     lastAnnouncedBirthdayName = entry.name;
                 }
