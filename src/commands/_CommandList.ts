@@ -1,4 +1,10 @@
 import { Command } from "../interfaces/Command";
-import { addBirthday } from "./addBirthday";
+import { addBirthdayCommand } from "./birthday/addBirthday";
+import { getBirthdayListCommand } from "./birthday/getBirthdayList"
+import { removeBirthdayCommand } from "./birthday/removeBirthday"
 
-export const CommandList: Command[] = [addBirthday];
+export const CommandList: Command[] = [
+    addBirthdayCommand,
+    getBirthdayListCommand,
+    removeBirthdayCommand
+];
