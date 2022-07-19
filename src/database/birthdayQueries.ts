@@ -5,7 +5,14 @@ export const getBirthdayList = async () => {
   const stmt = db.prepare("SELECT * FROM birthdays");
   const result = stmt.all();
   if (result !== undefined) {
-    return result;
+    const resultOrdered = result.sort((a, b) => (parseDateToComparable(a.birthday) > parseDateToComparable(b.birthday)) ? 1 : -1);
+    return resultOrdered;
+  }
+
+  function parseDateToComparable(input: Date): Date {
+    input.setHours(0, 0, 0, 0);
+    input.setFullYear(2000);
+    return input;
   }
 }
 
