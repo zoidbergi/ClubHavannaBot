@@ -5,7 +5,7 @@ export const getBirthdayList = async () => {
   const stmt = db.prepare("SELECT * FROM birthdays");
   const result = stmt.all();
   if (result !== undefined) {
-    const resultOrdered = result.sort((a, b) => (parseDateToComparable(a.birthday) > parseDateToComparable(b.birthday)) ? 1 : -1);
+    const resultOrdered = result.sort((a, b) => (parseDateToComparable(new Date(a.birthday)) > parseDateToComparable(new Date(b.birthday))) ? 1 : -1);
     return resultOrdered;
   }
 
