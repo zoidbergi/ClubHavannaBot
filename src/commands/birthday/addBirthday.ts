@@ -11,7 +11,7 @@ export const addBirthdayCommand: Command = {
     .addStringOption((option) =>
       option
         .setName("birthday")
-        .setDescription("Date of Birthday, Please use DD/MM/YYYY format.")
+        .setDescription("Date of Birthday, Please use DD.MM.YYYY format.")
         .setRequired(true)
     )
   ,
@@ -26,7 +26,7 @@ export const addBirthdayCommand: Command = {
     //Parse birthdate
     let parts = birthday.split(".");
     let dateParsed = new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));
-    console.log(dateParsed.toISOString());
+    //console.log(dateParsed.toISOString());
     if (dateParsed.toDateString() === "Invalid Date") {
       interaction.editReply('Wrong Date Format Idiot!');
       return;
