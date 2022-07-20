@@ -20,6 +20,7 @@ const onReady = async (BOT: Client) => {
   );
 
   await AttachEvents(BOT);
+  console.log('Bot locked and loaded');
 };
 
 export default onReady;
