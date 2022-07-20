@@ -3,11 +3,11 @@ import { getBirthdayList } from '../database/birthdayQueries';
 
 let lastAnnouncedBirthdayName: string;
 
-const isBirthdayToday = (someDate: Date) => {
+export function isBirthdayToday(someDate: Date) : boolean {
   const today = new Date();
   return someDate.getDate() === today.getDate()
     && someDate.getMonth() === today.getMonth();
-};
+}
 
 async function announceBirthday(client: Client) {
   const result = await getBirthdayList();
