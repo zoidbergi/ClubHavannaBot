@@ -1,6 +1,7 @@
 import { Client, DMChannel, TextChannel } from 'discord.js';
+import { ExplicitContentFilterLevels } from 'discord.js/typings/enums';
+import assert from 'node:assert';
 import { getBirthdayList } from '../database/birthdayQueries';
-
 let lastAnnouncedBirthdayName: string;
 
 export async function announceBirthday(client: Client) {
@@ -27,8 +28,9 @@ export async function announceBirthday(client: Client) {
   });
 }
 
-const isBirthdayToday = (someDate: Date) => {
+export const isBirthdayToday = (someDate: Date) => {
   const today = new Date();
   return someDate.getDate() == today.getDate()
         && someDate.getMonth() == today.getMonth();
 };
+
