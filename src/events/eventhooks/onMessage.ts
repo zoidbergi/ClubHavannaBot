@@ -9,6 +9,9 @@ const onMessageCreated = async (message: Message, client: Client) => {
     // stupid thing
     if (message.author.id === '448135048021934080' && !messageContent.includes('/')) {
       if (Math.random() < 0.1) {
+        if (message.attachments.size > 0 || messageContent.includes('http')) {
+          return;
+        }
         const fivehead = client.emojis.cache.find((emoji) => emoji.name === '5Head');
         const reply: string = `${randomBigLetter(messageContent)} ${fivehead?.toString()}`;
         await message.reply(reply);
