@@ -7,8 +7,8 @@
     "build": "tsc",
     "start": "node -r dotenv/config ./prod/index.js",
     "br": "npm run build && npm run start",
-    "lint": "eslint --max-warnings 0 'src/**/*.ts'",
-    "lint:fix": "eslint --max-warnings 0 'src/**/*.ts' --fix"
+    "lint": "eslint --max-warnings 0 \"**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --max-warnings 0 \"**/*.{ts,tsx}\" --fix"
   },
   "repository": {
     "type": "git",

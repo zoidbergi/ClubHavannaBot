@@ -1,10 +1,10 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { Client } from 'discord.js';
-import { CommandList } from '../commands/_CommandList';
-import { AttachEvents } from '../events/EventInitialisation';
+import CommandList from '../commands/_CommandList';
+import AttachEvents from './EventInitialisation';
 
-export const onReady = async (BOT: Client) => {
+const onReady = async (BOT: Client) => {
   const rest = new REST({ version: '9' }).setToken(
     process.env.BOT_TOKEN as string,
   );
@@ -19,7 +19,7 @@ export const onReady = async (BOT: Client) => {
     { body: commandData },
   );
 
-  console.log('Discord ready!');
-
   await AttachEvents(BOT);
 };
+
+export default onReady;

@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { MessageEmbed, MessagePayload } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import { Command } from '../../interfaces/Command';
 import { getBirthdayList } from '../../database/birthdayQueries';
-import { dateToString } from './formatDate';
+import dateToString from './formatDate';
 
-export const getBirthdayListCommand: Command = {
+const getBirthdayListCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('birthdaylist')
     .setDescription('Gets all Birthdays'),
@@ -30,7 +30,8 @@ export const getBirthdayListCommand: Command = {
       embedReply.addField(element.name, readableDate, true);
     });
 
-    console.log(result);
     await interaction.editReply({ embeds: [embedReply] });
   },
 };
+
+export default getBirthdayListCommand;

@@ -1,8 +1,13 @@
 import Database from 'better-sqlite3';
+import { Options } from 'discord.js';
 
 const path = require('path');
 
 const dbpath = path.join(__dirname, '..', '..', 'database', 'Club-Havanna.sqlite');
-console.log(dbpath);
 
-export const db = new Database(dbpath, { verbose: console.log });
+const logVerboseCallback = (databaseString: Options) => {
+  console.log(databaseString);
+};
+
+const db = new Database(dbpath, { verbose: logVerboseCallback });
+export default db;

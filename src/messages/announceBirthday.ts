@@ -1,9 +1,15 @@
-import { Client, DMChannel, TextChannel } from 'discord.js';
+import { Client, TextChannel } from 'discord.js';
 import { getBirthdayList } from '../database/birthdayQueries';
 
 let lastAnnouncedBirthdayName: string;
 
-export async function announceBirthday(client: Client) {
+const isBirthdayToday = (someDate: Date) => {
+  const today = new Date();
+  return someDate.getDate() === today.getDate()
+    && someDate.getMonth() === today.getMonth();
+};
+
+async function announceBirthday(client: Client) {
   const result = await getBirthdayList();
 
   if (result === undefined || result === null) {
@@ -18,7 +24,7 @@ export async function announceBirthday(client: Client) {
         if (channel?.isText()) {
           const sendChannel = channel as TextChannel;
           const party = client.emojis.cache.find((emoji) => emoji.name === 'Pepega');
-          const message: string = '@everyone' + ` ${entry.name} hat heute Geburtstag! WOO ${party?.toString()}`;
+          const message: string = `@everyone ${entry.name} hat heute Geburtstag! WOO ${party?.toString()}`;
           sendChannel.send(message);
           lastAnnouncedBirthdayName = entry.name;
         }
@@ -27,8 +33,4 @@ export async function announceBirthday(client: Client) {
   });
 }
 
-const isBirthdayToday = (someDate: Date) => {
-  const today = new Date();
-  return someDate.getDate() == today.getDate()
-        && someDate.getMonth() == today.getMonth();
-};
+export default announceBirthday;

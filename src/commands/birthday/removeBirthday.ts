@@ -3,7 +3,7 @@ import { MessageEmbed } from 'discord.js';
 import { Command } from '../../interfaces/Command';
 import { removeBirthday } from '../../database/birthdayQueries';
 
-export const removeBirthdayCommand: Command = {
+const removeBirthdayCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('birthdayremove')
     .setDescription('Removes your birthday.'),
@@ -30,3 +30,5 @@ export const removeBirthdayCommand: Command = {
     await interaction.editReply({ embeds: [embedReply] });
   },
 };
+
+export default removeBirthdayCommand;

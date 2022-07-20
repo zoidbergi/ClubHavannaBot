@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { MessageEmbed, MessagePayload } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import { Command } from '../../interfaces/Command';
 import { addBirthday, checkUserExsits, updateBirthday } from '../../database/birthdayQueries';
-import { dateToString } from './formatDate';
+import dateToString from './formatDate';
 
-export const addBirthdayCommand: Command = {
+const addBirthdayCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('birthdayset')
     .setDescription('Set a birthday')
@@ -32,10 +32,8 @@ export const addBirthdayCommand: Command = {
     // Check for user exist before adding and update instead
     const checkExist = await checkUserExsits(userName);
     if (checkExist === undefined || checkExist.name !== userName) {
-      console.log('Adding new user to entry');
       await addBirthday(userName, dateParsed.toISOString());
     } else {
-      console.log('User Exists, updating birthday entry');
       await updateBirthday(userName, dateParsed.toISOString());
     }
 
@@ -64,3 +62,5 @@ export const addBirthdayCommand: Command = {
     await interaction.editReply({ embeds: [embedReply] });
   },
 };
+
+export default addBirthdayCommand;

@@ -1,4 +1,4 @@
-export function dateToString(input: Date): string {
+function dateToString(input: Date): string {
   const yyyy = input.getFullYear();
   let mm = input.getMonth() + 1; // Months start at 0!
   let dd = input.getDate();
@@ -9,3 +9,5 @@ export function dateToString(input: Date): string {
   const formattedToday = `${dd}.${mm}.${yyyy}`;
   return formattedToday;
 }
+
+export default dateToString;

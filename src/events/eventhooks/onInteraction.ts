@@ -1,13 +1,14 @@
-import { Interaction } from 'discord.js';
-import { CommandList } from '../../commands/_CommandList';
+import { CommandInteraction } from 'discord.js';
+import CommandList from '../../commands/_CommandList';
 
-export const onInteraction = async (interaction: Interaction) => {
+const onInteraction = async (interaction: CommandInteraction) => {
   if (interaction.isCommand()) {
-    for (const Command of CommandList) {
-		  if (interaction.commandName === Command.data.name) {
-        await Command.run(interaction);
-        break;
-		  }
-    }
+    CommandList.forEach((element) => {
+      if (interaction.commandName === element.data.name) {
+        element.run(interaction);
+      }
+    });
   }
 };
+
+export default onInteraction;

@@ -1,19 +1,22 @@
-import { CommandInteraction } from 'discord.js';
-import { db } from '../database/sqlite3';
+import db from './sqlite3';
 
 export const getBirthdayList = async () => {
-  const stmt = db.prepare('SELECT * FROM birthdays');
-  const result = stmt.all();
-  if (result !== undefined) {
-    const resultOrdered = result.sort((a, b) => ((parseDateToComparable(new Date(a.birthday)) > parseDateToComparable(new Date(b.birthday))) ? 1 : -1));
-    return resultOrdered;
-  }
-
   function parseDateToComparable(input: Date): Date {
     input.setHours(0, 0, 0, 0);
     input.setFullYear(2000);
     return input;
   }
+
+  const stmt = db.prepare('SELECT * FROM birthdays');
+  const result = stmt.all();
+  if (result !== undefined) {
+    const resultOrdered = result.sort((a, b) => (
+      (parseDateToComparable(new Date(a.birthday))
+        > parseDateToComparable(new Date(b.birthday))) ? 1 : -1));
+    return resultOrdered;
+  }
+
+  return result;
 };
 
 export const checkUserExsits = async (userName: string) => {
@@ -22,6 +25,7 @@ export const checkUserExsits = async (userName: string) => {
   if (result !== undefined) {
     return result;
   }
+  return result;
 };
 
 // sqlite doesnt support date type :/
@@ -31,6 +35,7 @@ export const addBirthday = async (userName: string, birthdayDate: string) => {
   if (result !== undefined) {
     return result;
   }
+  return result;
 };
 
 export const removeBirthday = async (userName: string) => {
@@ -39,6 +44,7 @@ export const removeBirthday = async (userName: string) => {
   if (result !== undefined) {
     return result;
   }
+  return result;
 };
 
 // ToDo: Update Birthday
@@ -48,4 +54,5 @@ export const updateBirthday = async (userName: string, newBirthdate: string) => 
   if (result !== undefined) {
     return result;
   }
+  return result;
 };
