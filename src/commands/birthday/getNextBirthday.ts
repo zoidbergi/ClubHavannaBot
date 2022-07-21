@@ -23,10 +23,10 @@ const getNextBirthday: Command = {
     let nextBirthdayName = 'niemand';
     let nextBirthdayDate = '00';
     function isBirthdayAfterToday(birthday: Date, todayDate: Date): boolean {
-      const compare = birthday.getMonth() >= todayDate.getMonth()
-      && birthday.getDate() > todayDate.getDate();
-      console.log(compare);
-      return compare;
+      if (birthday.getMonth() === todayDate.getMonth()) {
+        return birthday.getDate() > todayDate.getDate();
+      }
+      return birthday.getMonth() >= todayDate.getMonth();
     }
 
     //  birthday list is already sorted by dd/MM so we can break on first occurrence
