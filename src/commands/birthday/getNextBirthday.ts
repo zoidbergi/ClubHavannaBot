@@ -23,25 +23,19 @@ const getNextBirthday: Command = {
     let nextBirthdayName = 'niemand';
     let nextBirthdayDate = '00';
     function isBirthdayAfterToday(birthday: Date, todayDate: Date): boolean {
-      if (birthday.getMonth() === todayDate.getMonth()) {
-        return birthday.getDate() > todayDate.getDate();
+      if (birthday.getMonth === todayDate.getMonth) {
+        return birthday.getDate > todayDate.getDate;
       }
-      return birthday.getMonth() >= todayDate.getMonth();
+      return birthday.getMonth >= todayDate.getMonth;
     }
 
-    //  birthday list is already sorted by dd/MM so we can break on first occurrence
-    for (let i = 0; i < result.length; i += 1) {
-      const birthdayDate = new Date(result[i].birthday);
-      if (isBirthdayAfterToday(birthdayDate, today)) {
-        nextBirthdayDate = result[i].birthday;
-        nextBirthdayName = result[i].name;
-        break;
-      }
-      if (i === result.length - 1 && result[0] !== undefined) {
-        //  NoBirthday found in this year. Take first list entry
-        nextBirthdayName = result[0].name;
-        nextBirthdayDate = result[0].birthday;
-      }
+    const arr = result.filter((res) => isBirthdayAfterToday(res.birthday, today));
+    if (arr.length > 1) {
+      nextBirthdayName = arr[0].name;
+      nextBirthdayDate = arr[0].birthday;
+    } else {
+      nextBirthdayName = result[0].name;
+      nextBirthdayDate = result[0].birthday;
     }
 
     const embedReply = new MessageEmbed();
