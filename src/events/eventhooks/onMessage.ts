@@ -7,7 +7,7 @@ const onMessageCreated = async (message: Message, client: Client) => {
     const messageContent = message.content;
 
     // stupid thing
-    if (message.author.id === '448135048021934080' && !messageContent.includes('/')) {
+    if (message.author.id === '448135048021934080' && !messageContent.includes('/') && !messageContent.includes('bb')) {
       if (Math.random() < 0.1) {
         if (message.attachments.size > 0 || messageContent.includes('http')) {
           return;
